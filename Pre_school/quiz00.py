@@ -159,7 +159,7 @@ def main(case_number: int) -> None:
         print(f"case_number: {case_number}")
         quiz_list[case_number - 1]()
         return
-    except:
+    except IndexError:
         print("case_number is out of range")
         return
 
