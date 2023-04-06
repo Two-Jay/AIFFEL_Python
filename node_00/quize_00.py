@@ -1,4 +1,10 @@
 import argparse
+from textwrap import dedent
+
+# python 에서는 multi-line string을 작성할 때, """ 또는 '''를 사용한다.
+# 이 때, """ 또는 '''를 사용하면, 문자열 내부에 작성된 줄바꿈 문자도 문자열에 포함된다.
+# 이를 방지하기 위해, textwrap 모듈의 dedent 함수를 사용한다.
+# dedent 함수는, 문자열의 indentation을 제거한다.
 
 # ===============================================================================
 
@@ -45,10 +51,15 @@ def quiz_03():
     # End my code here
     print(ret)  # ('o', '\t', 'p')가 출력되어야 합니다.
 
-    reason = """# 단순 인덱싱이라면 위와 같이 처리할 수 있다.
-# 문자열 자체는 iterable 하므로, tuple() 함수를 이용하여 tuple로 변환할 수 있다.
-# 이 때, 각각의 문자는 tuple의 원소가 된다."""
-    print(reason)
+    print(
+        dedent(
+            """
+        # 단순 인덱싱이라면 위와 같이 처리할 수 있다.
+        # 문자열 자체는 iterable 하므로, tuple() 함수를 이용하여 tuple로 변환할 수 있다.
+        # 이 때, 각각의 문자는 tuple의 원소가 된다.
+        """
+        )
+    )
 
 
 # ===============================================================================
@@ -76,7 +87,7 @@ def quiz_05():
     실습퀴즈5. 리스트
     여러분이 좋아하는 음식이 담긴 리스트를 만들어보세요.
     """
-    favorite_foods = list("pizza", "hamburger", "chicken")
+    favorite_foods = ["pizza", "hamburger", "chicken"]
     print(f"내가 좋아하는 음식은 = {favorite_foods}")
 
 
@@ -92,30 +103,65 @@ def quiz_06():
     quiz_list = ["잘잔다", "잘한다", "자란다", "잘할까", "화이팅", "힘내자"]
     python_list = ["파이썬", "PYTHON", "python"]
 
-    # answer = quiz_list[#q1]*#q2 + python_list[#q3]
-    # print(answer)
-    print("코드 작성 이유:?")
+    answer = quiz_list[2] * 2 + python_list[0]
+    print(answer)
+    print(
+        dedent(
+            """
+            # 코드 작성 이유: 리스트의 인덱싱과 연산을 이용하여, 자란다자란다파이썬을 출력하였다.
+            # 문자열은 곱셈을 이용하면 반복해서 출력이 가능하며, 덧셈을 이용하면 문자열 concatenation이 가능하다.  
+            """
+        )
+    )
 
 
 # ===============================================================================
 
 
 def quiz_07():
-    return
-
-
-def quiz_08():
+    """
+    실습퀴즈7. 배타적 차집합
+    A와 B가 겹치지않게 좋아하는 음식을 코드로 표현해주세요.
+    """
+    set_a = {"치킨", "민트초코", "파인애플피자"}
+    set_b = {"치킨", "화이트초코", "페퍼로니피자"}
+    # Start my code here
+    answer = set_a ^ set_b
+    # End my code here
+    print(answer)  # {'민트초코', '파인애플피자', '화이트초코', '페퍼로니피자'}가 출력되어야 합니다.
     return
 
 
 # ===============================================================================
-def main(args: argparse.Namespace):
+
+
+def quiz_08():
+    """
+    실습퀴즈8. 딕셔너리
+    아이펠의 몸무게 정보를 지워주세요.
+    딕셔너리에서는 대괄호[] 안에 Key를 입력해야 삭제할 수 있어요.
+    """
+    quiz_dic = {"이름": "아이펠", "나이": 35, "MBTI": "ESFJ", "몸무게": 80}
+    # Start my code here
+    del quiz_dic["몸무게"]
+    # End my code here
+    print(quiz_dic)  # {'이름': '아이펠', '나이': 35, 'MBTI': 'ESFJ'}가 출력되어야 합니다.
+    return
+
+
+# ===============================================================================
+def main(case_number: int) -> None:
     quiz_list = [quiz_01, quiz_02, quiz_03, quiz_04, quiz_05, quiz_06, quiz_07, quiz_08]
-    if args.case_number == None:
+    if case_number == None:
         print("usage: quize_00.py [-h] [-c CASE_NUMBER]\nex) quize_00.py -c 1")
         return
-    print(f"case_number: {args.case_number}")
-    quiz_list[args.case_number - 1]()
+    try:
+        print(f"case_number: {case_number}")
+        quiz_list[case_number - 1]()
+        return
+    except:
+        print("case_number is out of range")
+        return
 
 
 def get_arguments():
@@ -125,4 +171,4 @@ def get_arguments():
 
 
 if __name__ == "__main__":
-    main(get_arguments())
+    main(get_arguments().case_number)
