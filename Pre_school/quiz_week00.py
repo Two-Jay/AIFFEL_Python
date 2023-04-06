@@ -160,7 +160,7 @@ def main(case_number: int) -> None:
         quiz_list[case_number - 1]()
         return
     except IndexError:
-        print("case_number is out of range")
+        print(f"case_number is out of range.\nmaximum case_number is {len(quiz_list)}")
         return
 
 

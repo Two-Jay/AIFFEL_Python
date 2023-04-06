@@ -61,14 +61,14 @@ def quiz_04():
     # 1부터 10까지의 숫자 중 홀수인 수를 모은 리스트를 만들어 보세요.
     """
     # Start my code here
-    odd_list = [i for i in range(1, 11) if i % 2 == 1]
-    odd_list_2 = [i for i in range(1, 11, 2)]
-    odd_list_3 = list(range(1, 11, 2))
-    odd_list_4 = list(filter(lambda x: x % 2 == 1, range(1, 11)))
-    print(odd_list)
-    print(odd_list_2)
-    print(odd_list_3)
-    print(odd_list_4)
+    odd_list = []
+    odd_list.append([i for i in range(1, 11) if i % 2 == 1])
+    odd_list.append([i for i in range(1, 11, 2)])
+    odd_list.append(list(range(1, 11, 2)))
+    odd_list.append(list(filter(lambda x: x % 2 == 1, range(1, 11))))
+
+    answer = [1, 3, 5, 7, 9]
+    print(f"모두 {answer} 로 출력이 되었나요? : {all(answer == lst for lst in odd_list)}")
     # End my code here
     return
 
@@ -84,7 +84,7 @@ def main(case_number: int) -> None:
         quiz_list[case_number - 1]()
         return
     except IndexError:
-        print("case_number is out of range")
+        print(f"case_number is out of range.\nmaximum case_number is {len(quiz_list)}")
         return
 
 
