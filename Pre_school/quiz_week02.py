@@ -62,8 +62,10 @@ def quiz_04():
     """
     # Start my code here
     odd_list = []
+
     odd_list.append([i for i in range(1, 11) if i % 2 == 1])
     odd_list.append([i for i in range(1, 11, 2)])
+
     odd_list.append(list(range(1, 11, 2)))
     odd_list.append(list(filter(lambda x: x % 2 == 1, range(1, 11))))
 
